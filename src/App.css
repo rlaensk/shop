@@ -36,3 +36,31 @@
     transform: rotate(360deg);
   }
 }
+a {
+  text-decoration: none;
+  color: #000000;
+}
+.main-bg {
+  height: 300px;
+  background-image: url("../public/shose.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.mainItem img {
+  width: 50%;
+  height: 200px;
+}
+.nav + div {
+  width: 100%;
+  height: 300px;
+}
+.start {
+  opacity: 0;
+}
+/* 동작 전 애니메이션 설정 */
+.end {
+  opacity: 1;
+  transition: opacity 0.5s;
+  /*opacity가 변경될떄 0.5초에 결쳐 변경되게 해주세요*/
+}
+/* 동작 후 애니메이션 */
