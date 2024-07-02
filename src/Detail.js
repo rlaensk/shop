@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { Button, Nav, Link } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "./store";
 
 const Detail = (props) => {
   const { id } = useParams();
@@ -11,7 +13,9 @@ const Detail = (props) => {
     return x.id == id;
   });
 
-  const [hide, setHied] = useState(true);
+  let cart = useSelector((state) => state.product);
+  let dispatch = useDispatch();
+
   useEffect(() => {
     if (isNaN(inChange) === true) {
       alert("정준우바보!!!");
@@ -19,20 +23,16 @@ const Detail = (props) => {
     }
   }, [inChange]);
 
-  const [count, setCount] = useState(0);
   const Clickbtn = (index) => {
     setTap(index);
   };
-
+  if (!findShose) {
+    return <div> 해당 상품을 찾을 수 없습니다</div>;
+  }
+  console.log(findShose);
   return (
     <>
       <div className="container">
-        {!hide ? null : (
-          <div className="alert alert-warning">2초이내 구매시 할인</div>
-        )}
-
-        {count}
-        <Button onClick={() => setCount(count + 1)}>👍</Button>
         <div className="row">
           <div className="col-md-6">
             <img src={findShose.url} width="100%" alt="shose" />
@@ -51,7 +51,20 @@ const Detail = (props) => {
             <h4 className="pt-5">{findShose.title}</h4>
             <p>{findShose.content}</p>
             <p>{findShose.price}</p>
-            <button className="btn btn-danger">주문하기</button>
+            <button
+              className="btn btn-danger"
+              onClick={() => {
+                dispatch(
+                  addItem({
+                    id: findShose.id,
+                    name: findShose.title,
+                    count: findShose.count,
+                  })
+                );
+              }}
+            >
+              주문하기
+            </button>
           </div>
         </div>
         <Nav variant="tabs" defaultActiveKey="link0">

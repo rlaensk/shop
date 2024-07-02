@@ -1,0 +1,58 @@
+[
+  {
+    "id": 3,
+    "title": "나이키 V2K런",
+    "url": "/2.PNG",
+    "content": "신발",
+    "price": 159000,
+    "count": 2
+  },
+  {
+    "id": 4,
+    "title": "나이키 에어맥스 플러스",
+    "url": "/3.PNG",
+    "content": "남성 신발",
+    "price": 219000,
+    "count": 2
+  },
+  {
+    "id": 5,
+    "title": "나이키 덩크 로우 넥스트 네이처",
+    "url": "/4.PNG",
+    "content": "여성 신발",
+    "price": 139000,
+    "count": 2
+  },
+  {
+    "id": 6,
+    "title": "나이키 덩크 하이 레트로 SE",
+    "url": "/5.PNG",
+    "content": "남성 신발",
+    "price": 159000,
+    "count": 3
+  },
+  {
+    "id": 7,
+    "title": "나이키 에어맥스 90 프리미엄",
+    "url": "/6.PNG",
+    "content": "남성 신발",
+    "price": 169000,
+    "count": 1
+  },
+  {
+    "id": 8,
+    "title": "나이키 TC 7900",
+    "url": "/7.PNG",
+    "content": "여성 신발",
+    "price": 149000,
+    "count": 6
+  },
+  {
+    "id": 9,
+    "title": "나이키 에어맥스 코코",
+    "url": "/8.PNG",
+    "content": "여성 샌들",
+    "price": 119000,
+    "count": 4
+  }
+]
