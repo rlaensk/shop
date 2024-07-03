@@ -1,5 +1,6 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import user from "./store/userSlice.js";
+import itemSort from "./store/sortSlice.js";
 
 let product = createSlice({
   name: "product",
@@ -17,9 +18,9 @@ let product = createSlice({
         product.count += 1;
       }
     },
-    sort(state) {
-      state.sort((a, b) => a.name.localeCompare(b.name));
-    },
+    // sort(state) {
+    //   state.sort((a, b) => a.name.localeCompare(b.name));
+    // },
     addItem(state, action) {
       state.push(action.payload);
     },
@@ -31,6 +32,6 @@ export default configureStore({
   reducer: {
     user: user.reducer,
     product: product.reducer,
-    sort: sort.reducer,
+    itemSort: itemSort,
   },
 });

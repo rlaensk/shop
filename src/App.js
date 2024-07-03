@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Navbar,
   Container,
@@ -16,11 +16,41 @@ import data from "./data";
 import Shose from "./Shose";
 import axios from "axios";
 import Cart from "./pages/Cart.js";
+import { useDispatch, useSelector } from "react-redux";
+import { highPriceSort, lowPriceSort, nameSort } from "./store/sortSlice.js";
 
 function App() {
-  const [shose, setShose] = useState(data);
+  const [shose, setShose] = useState(data); //초기 전체 데이터
   const [clickCount, setClickCount] = useState(1);
 
+  const [currentPage, setCurrentPage] = useState(2);
+  const [allShoes, setAllShoes] = useState([]); //get으로 받아온 전체데이터
+
+  const dispatch = useDispatch();
+  // const sortedItems = useSelector((state) => state.itemSort.items);
+  useEffect(() => {
+    //초기 데이터 로드
+    axios
+      .get("/shose.json")
+      .then((result) => {
+        setAllShoes(result.data);
+        // 처음 로드할 때 첫 페이지 데이터 설정
+        const initialData = result.data.slice(0, 6);
+        setShose(initialData);
+      })
+      .catch(() => {
+        alert("데이터를 불러오지 못했습니다.");
+      });
+  }, []);
+
+  const loadMoreData = () => {
+    const nextPage = currentPage + 1;
+    const startIndex = (nextPage - 1) * 3;
+    const endIndex = nextPage * 3;
+    const nextData = allShoes.slice(startIndex, endIndex);
+    setShose((prevShoes) => [...prevShoes, ...nextData]);
+    setCurrentPage(nextPage);
+  };
   let navigate = useNavigate();
 
   return (
@@ -53,26 +83,33 @@ function App() {
           element={
             <>
               <div className="main-bg"></div>
-
-              <Shose shose={shose} />
-              <button
+              <Button
+                variant="outline-primary"
                 onClick={() => {
-                  setClickCount(clickCount + 1);
-
-                  axios
-                    .get("/shose.json")
-                    .then((result) => {
-                      let copy = [...shose, ...result.data];
-                      setShose(copy);
-                      console.log(result);
-                    })
-                    .catch(() => {
-                      alert("데이터 없음 ㅅㄱ");
-                    });
+                  dispatch(nameSort(shose));
+                  console.log(nameSort.items);
                 }}
               >
-                더보기
-              </button>
+                이름순 정렬
+              </Button>
+              <Button
+                variant="outline-secondary"
+                onClick={() => {
+                  dispatch(lowPriceSort(shose));
+                }}
+              >
+                낮은가격순 정렬
+              </Button>
+              <Button
+                variant="outline-success"
+                onClick={() => {
+                  dispatch(highPriceSort(shose));
+                }}
+              >
+                높은가격순 정렬
+              </Button>
+              <Shose shose={shose} />
+              <button onClick={loadMoreData}>더보기</button>
             </>
           }
         />
