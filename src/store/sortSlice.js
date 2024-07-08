@@ -10,7 +10,7 @@ let itemSort = createSlice({
       );
 
       let no_copy = copy.map((item) => item.id);
-      console.log(JSON.stringify(copy));
+      console.log("정렬후:" + copy);
       state.items = copy;
       state.no = no_copy;
     },
@@ -19,12 +19,14 @@ let itemSort = createSlice({
         a.price > b.price ? 1 : -1
       );
       let no_copy = copy.map((item) => item.id);
+      console.log("정렬후:" + action);
       return { items: copy, no: no_copy };
     },
     highPriceSort(state, action) {
       let copy = [...action.payload].sort((a, b) =>
         b.price > a.price ? 1 : -1
       );
+      console.log("정렬후:" + copy);
       let no_copy = copy.map((item) => item.id);
       return { items: copy, no: no_copy };
     },

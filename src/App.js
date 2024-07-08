@@ -13,12 +13,11 @@ import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import { AboutMember, Aboutlocation } from "./About";
 import Detail from "./Detail";
 import data from "./data";
-import Shose from "./Shose";
+import Shose from "./Shose.js";
 import axios from "axios";
 import Cart from "./pages/Cart.js";
 import { useDispatch, useSelector } from "react-redux";
-import { highPriceSort, lowPriceSort, nameSort } from "./store/sortSlice.js";
-
+import { nameSort, lowPriceSort, highPriceSort } from "./store/sortSlice.js";
 function App() {
   const [shose, setShose] = useState(data); //초기 전체 데이터
   const [clickCount, setClickCount] = useState(1);
@@ -27,7 +26,7 @@ function App() {
   const [allShoes, setAllShoes] = useState([]); //get으로 받아온 전체데이터
 
   const dispatch = useDispatch();
-  // const sortedItems = useSelector((state) => state.itemSort.items);
+  const sortedItems = useSelector((state) => state.sortSlice);
   useEffect(() => {
     //초기 데이터 로드
     axios
@@ -108,7 +107,7 @@ function App() {
               >
                 높은가격순 정렬
               </Button>
-              <Shose shose={shose} />
+              <Shose shose={sortedItems.length ? sortedItems : shose} />
               <button onClick={loadMoreData}>더보기</button>
             </>
           }

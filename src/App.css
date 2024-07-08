@@ -64,3 +64,27 @@ a {
   /*opacity가 변경될떄 0.5초에 결쳐 변경되게 해주세요*/
 }
 /* 동작 후 애니메이션 */
+.detailwrap {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.detailwrap .rowBox {
+  width: 50%;
+}
+.detailwrap .rowBox img {
+  width: 100%;
+}
+.detailwrap .rowBox {
+  width: 80%;
+}
+.detailwrap .recent {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #000000;
+}
+.detailwrap .recent img {
+  width: 150px;
+}
